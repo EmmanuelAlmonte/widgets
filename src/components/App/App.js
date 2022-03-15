@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Accordion from '../Accordion/Accordion'
+import Search from '../Search/Search'
 
 const items = [
   {
@@ -20,7 +22,8 @@ const items = [
 export default () => {
   return (
     <div>
-      <Accordion items={items} />
+      {/* <Accordion items={items} /> */}
+      <Search/>
     </div>
   )
 }
