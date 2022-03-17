@@ -3,7 +3,18 @@ import axios from 'axios'
 
 const Search = () => {
   const [term, setTerm] = useState('programming')
+  const [debouncedTerm, setDebouncedTerm] = useState(term)
   const [results, setResults] = useState([])
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term)
+    }, 1000)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [term])
 
   useEffect(() => {
     const search = async () => {
@@ -13,17 +24,42 @@ const Search = () => {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term
+          srsearch: debouncedTerm
         }
       })
-      setResults(data.query.search)
+      setResults(data.query.search)  
     }
     search()
-  }, [term])
-  
+
+  }, [debouncedTerm])
+
+  // useEffect(() => { if (term && !results.length) {
+  //     search()
+  //   } else {
+  //     const timerId = setTimeout(() => {
+  //       if (term) {
+  //         search()
+  //       }
+  //     }, 1000)
+
+  //     return () => {
+  //       clearTimeout(timerId)
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [term])
+
   const renderedResults = results.map(result => {
     return (
       <div key={result.pageid} className='item'>
+        <div className='right floated content'>
+          <a
+            className='ui button'
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            GO
+          </a>
+        </div>
         <div className='content'>
           <div className='header'>{result.title}</div>
           <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
