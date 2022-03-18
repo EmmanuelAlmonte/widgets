@@ -4,7 +4,8 @@ import Accordion from '../Accordion/Accordion'
 import Search from '../Search/Search'
 import Dropdown from '../Dropdown/Dropdown'
 import Translate from '../Translate/Translate'
-
+import Route from '../Route/Route'
+import Header from '../Header/Header'
 const items = [
   {
     title: 'What is React?',
@@ -42,18 +43,23 @@ export default () => {
 
   return (
     <div>
+      <Header/>
+      <Route path='/'>
+        <Accordion items={items} />
+      </Route>
+      <Route path='/list'>
+        <Search />
+      </Route>
+      <Route path='/dropdown'>
+        <Dropdown label='Select a Color' options={options} selected={selected} onSelectedChange={setSelected} />
+      </Route>
+      <Route path='/translate'>
+        <Translate />
+      </Route>
+
       {/* <button onClick={() => setShowDropdown(!showDropdown)}>
         Toggle Dropdown
       </button> */}
-      {/* <Accordion items={items} /> */}
-      {/* <Search/> */}
-      {/* { showDropdown ? 
-      <Dropdown
-        selected={selected}
-        onSelectedChange={setSelected}
-        options={options}
-      /> : null} */}
-      <Translate/>
     </div>
   )
 }
