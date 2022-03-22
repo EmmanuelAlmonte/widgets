@@ -43,7 +43,7 @@ export default () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <Route path='/'>
         <Accordion items={items} />
       </Route>
@@ -51,15 +51,16 @@ export default () => {
         <Search />
       </Route>
       <Route path='/dropdown'>
-        <Dropdown label='Select a Color' options={options} selected={selected} onSelectedChange={setSelected} />
+        <Dropdown
+          label='Select a Color'
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        />
       </Route>
       <Route path='/translate'>
         <Translate />
       </Route>
-
-      {/* <button onClick={() => setShowDropdown(!showDropdown)}>
-        Toggle Dropdown
-      </button> */}
     </div>
   )
 }

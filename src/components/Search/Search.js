@@ -27,10 +27,9 @@ const Search = () => {
           srsearch: debouncedTerm
         }
       })
-      setResults(data.query.search)  
+      setResults(data.query.search)
     }
     search()
-
   }, [debouncedTerm])
 
   // useEffect(() => { if (term && !results.length) {
